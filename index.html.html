@@ -1,0 +1,1396 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --deep:#17302B;
+  --deep-2:#1F3F38;
+  --paper:#F2ECDD;
+  --paper-2:#E9E1CB;
+  --gold:#E3A857;
+  --clay:#C1613F;
+  --sage:#8FA88A;
+  --ink:#17302B;
+  --cream-ink:#F2ECDD;
+  --line: rgba(23,48,43,0.14);
+  --line-light: rgba(242,236,221,0.2);
+
+  --disp-en:'Oswald', sans-serif;
+  --disp-ar:'Cairo', sans-serif;
+  --body-en:'Inter', sans-serif;
+  --body-ar:'Cairo', sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body-en);
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+[dir="rtl"] body{ font-family:var(--body-ar); }
+[dir="rtl"] .disp{ font-family:var(--disp-ar); }
+[dir="ltr"] .disp, .disp{ font-family:var(--disp-en); }
+
+.disp{ font-family:var(--disp-en); }
+
+a{color:inherit;}
+img,svg{display:block; max-width:100%;}
+button{font:inherit; cursor:pointer;}
+
+.wrap{
+  max-width:1120px;
+  margin:0 auto;
+  padding:0 28px;
+}
+@media (max-width:480px){
+  .wrap{ padding:0 18px; }
+}
+
+/* ---------- NAV ---------- */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(23,48,43,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line-light);
+}
+.nav .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  height:68px;
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  color:var(--paper);
+  font-weight:600;
+  font-size:1.05rem;
+  letter-spacing:0.01em;
+}
+.brand-mark{
+  width:30px; height:30px;
+  border-radius:50%;
+  background:conic-gradient(var(--gold),var(--clay),var(--sage),var(--gold));
+  flex-shrink:0;
+}
+.nav-links{ display:flex; align-items:center; gap:26px; }
+.nav-links a{
+  color:rgba(242,236,221,0.75); font-size:0.88rem; font-weight:600;
+  text-decoration:none; transition:color .2s ease;
+}
+.nav-links a:hover{ color:var(--gold); }
+.nav-actions{display:flex; align-items:center; gap:12px;}
+.nav-login{
+  background:transparent; color:var(--paper); border:1px solid var(--line-light);
+  padding:8px 18px; border-radius:100px; font-weight:600; font-size:0.85rem;
+}
+.nav-login:hover{ border-color:var(--gold); color:var(--gold); }
+.nav-user-badge{
+  display:none; align-items:center; gap:9px;
+  background:rgba(242,236,221,0.08); border:1px solid var(--line-light);
+  padding:6px 8px 6px 14px; border-radius:100px;
+}
+[dir="rtl"] .nav-user-badge{ padding:6px 14px 6px 8px; }
+.nav-user-dot{ width:8px; height:8px; border-radius:50%; background:var(--sage); flex-shrink:0; }
+#nav-user-name{ color:var(--paper); font-size:0.85rem; font-weight:600; max-width:120px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.nav-logout{
+  background:var(--gold); color:var(--deep); border:none; font-size:0.76rem; font-weight:700;
+  padding:6px 12px; border-radius:100px;
+}
+@media (max-width:760px){ .nav-links{ display:none; } }
+@media (max-width:480px){
+  .nav .wrap{ height:60px; }
+  .brand{ font-size:0.92rem; gap:7px; }
+  .brand-mark{ width:24px; height:24px; }
+  .nav-actions{ gap:7px; }
+  .lang-toggle button{ padding:5px 10px; font-size:0.76rem; }
+  .nav-login{ display:none; }
+  .nav-cta{ padding:8px 14px; font-size:0.78rem; }
+  #nav-user-name{ max-width:64px; }
+  .nav-logout{ padding:5px 10px; font-size:0.7rem; }
+}
+.lang-toggle{
+  display:flex; background:rgba(242,236,221,0.1); border:1px solid var(--line-light);
+  border-radius:100px; padding:3px; gap:2px;
+}
+.lang-toggle button{
+  border:none; background:transparent; color:var(--paper);
+  padding:6px 14px; border-radius:100px; font-size:0.82rem; font-weight:600;
+  opacity:0.6; transition:all .25s ease;
+}
+.lang-toggle button.active{ background:var(--gold); color:var(--deep); opacity:1; }
+.nav-cta{
+  background:var(--gold); color:var(--deep); border:none;
+  padding:9px 20px; border-radius:100px; font-weight:700; font-size:0.85rem;
+  transition:transform .2s ease;
+}
+.nav-cta:hover{ transform:translateY(-1px); }
+
+/* ---------- HERO ---------- */
+.hero{
+  background:radial-gradient(120% 100% at 50% 0%, var(--deep-2) 0%, var(--deep) 60%);
+  color:var(--paper);
+  padding:88px 0 0;
+  position:relative;
+  overflow:hidden;
+}
+.hero .wrap{
+  display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px;
+  align-items:center;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--gold); font-weight:700; margin-bottom:22px;
+}
+.eyebrow::before{
+  content:''; width:22px; height:1px; background:var(--gold);
+}
+[dir="rtl"] .eyebrow{ letter-spacing:0; }
+h1.hero-title{
+  font-size:clamp(2.4rem, 4.4vw, 3.8rem);
+  line-height:1.06;
+  font-weight:700;
+  letter-spacing:-0.01em;
+  text-transform:uppercase;
+  margin-bottom:22px;
+  color:var(--paper);
+}
+[dir="rtl"] h1.hero-title{ text-transform:none; letter-spacing:0; font-weight:800; }
+h1.hero-title em{
+  font-style:normal; color:var(--gold);
+}
+.hero-sub{
+  font-size:1.08rem;
+  color:rgba(242,236,221,0.78);
+  max-width:480px;
+  margin-bottom:34px;
+}
+.hero-actions{display:flex; gap:14px; flex-wrap:wrap;}
+.btn-primary{
+  background:var(--gold); color:var(--deep); border:none;
+  padding:14px 26px; border-radius:100px; font-weight:700; font-size:0.95rem;
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.btn-primary:hover{ transform:translateY(-2px); box-shadow:0 10px 24px rgba(227,168,87,0.25);}
+.btn-ghost{
+  background:transparent; color:var(--paper); border:1px solid var(--line-light);
+  padding:14px 26px; border-radius:100px; font-weight:600; font-size:0.95rem;
+}
+.btn-ghost:hover{ border-color:var(--gold); color:var(--gold); }
+
+/* Compass signature */
+.compass-wrap{
+  position:relative;
+  display:flex; align-items:center; justify-content:center;
+  padding:20px 0 80px;
+}
+.compass{
+  width:340px; height:340px; max-width:90vw; max-height:90vw;
+  position:relative;
+}
+.compass svg{ width:100%; height:100%; }
+.compass-node{
+  cursor:pointer;
+  transition:transform .3s ease;
+  transform-origin:center;
+}
+.compass-node:hover, .compass-node.active{ transform:scale(1.06); }
+.compass-node text{
+  font-family:var(--body-en); font-weight:700; font-size:12.5px;
+  fill:var(--deep);
+}
+[dir="rtl"] .compass-node text{ font-family:var(--body-ar); font-size:13px; }
+.compass-center{
+  transition:transform .4s ease;
+}
+.compass-center.pulse{ animation:pulse 2.4s ease-in-out infinite; }
+@keyframes pulse{
+  0%,100%{ transform:scale(1); }
+  50%{ transform:scale(1.05); }
+}
+
+/* ---------- DOMAINS ---------- */
+.section{ padding:88px 0; }
+.section-head{
+  max-width:640px; margin-bottom:52px;
+}
+.tag{
+  font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase;
+  color:var(--clay); font-weight:700; margin-bottom:14px; display:block;
+}
+[dir="rtl"] .tag{ letter-spacing:0; }
+h2.sec-title{
+  font-size:clamp(1.7rem,3vw,2.4rem);
+  font-weight:600; letter-spacing:-0.005em; line-height:1.15; margin-bottom:14px;
+}
+[dir="rtl"] h2.sec-title{ font-weight:800; letter-spacing:0; }
+.sec-desc{ color:rgba(23,48,43,0.7); font-size:1.02rem; max-width:560px;}
+
+.domains-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:22px;
+}
+.domain-card{
+  background:var(--paper-2);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px 26px;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.domain-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 34px rgba(23,48,43,0.1);
+  border-color:var(--dot,var(--gold));
+}
+.domain-dot{
+  width:38px; height:38px; border-radius:11px;
+  display:flex; align-items:center; justify-content:center;
+  margin-bottom:20px; font-size:1.2rem;
+}
+.domain-card h3{ font-size:1.15rem; font-weight:700; margin-bottom:10px; }
+.domain-card p{ font-size:0.93rem; color:rgba(23,48,43,0.68); }
+
+/* ---------- PROGRAMS ---------- */
+.programs-section{ background:var(--paper-2); }
+.programs-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+}
+.program-card{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:26px 22px;
+  display:flex; flex-direction:column;
+  position:relative;
+  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+.program-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 18px 34px rgba(23,48,43,0.1);
+  border-color:var(--dot,var(--gold));
+}
+.program-card.featured-program{
+  background:var(--deep); border-color:var(--deep); color:var(--paper);
+}
+.program-badge{
+  position:absolute; top:-12px; inset-inline-start:22px;
+  background:var(--gold); color:var(--deep); font-size:0.7rem; font-weight:800;
+  padding:4px 12px; border-radius:100px;
+}
+.program-duration{
+  font-family:var(--disp-en); font-weight:700; font-size:0.95rem; margin-bottom:14px; display:block;
+}
+[dir="rtl"] .program-duration{ font-family:var(--disp-ar); font-weight:800; }
+.program-card h3{ font-size:1.02rem; font-weight:700; margin-bottom:8px; }
+.program-card p{ font-size:0.86rem; color:rgba(23,48,43,0.65); margin-bottom:20px; flex:1; }
+.program-card.featured-program p{ color:rgba(242,236,221,0.72); }
+.program-btn{
+  background:transparent; border:1px solid var(--line); color:var(--ink);
+  padding:10px; border-radius:100px; font-weight:600; font-size:0.83rem;
+  transition:all .2s ease;
+}
+.program-btn:hover{ border-color:var(--gold); color:var(--clay); }
+.program-btn.light{ border-color:var(--line-light); color:var(--paper); }
+.program-btn.light:hover{ border-color:var(--gold); color:var(--gold); }
+
+/* ---------- HOW IT WORKS (dark) ---------- */
+.how{ background:var(--deep); color:var(--paper); }
+.how .tag{ color:var(--gold); }
+.how .sec-desc{ color:rgba(242,236,221,0.7); }
+.steps{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+  margin-top:20px; position:relative;
+}
+.step{
+  padding:0 20px 0 0;
+  border-inline-start:1px solid var(--line-light);
+  padding-inline-start:20px;
+  position:relative;
+}
+.step:first-child{ border-inline-start:none; padding-inline-start:0; }
+.step-num{
+  font-family:var(--body-en); font-size:0.78rem; color:var(--gold);
+  font-weight:700; letter-spacing:0.08em; margin-bottom:14px; display:block;
+}
+.step h4{ font-size:1.02rem; font-weight:700; margin-bottom:8px; }
+.step p{ font-size:0.88rem; color:rgba(242,236,221,0.65); }
+
+/* ---------- CHAT ---------- */
+.chat-section{ background:var(--paper); }
+.chat-shell{
+  background:var(--deep);
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 30px 60px rgba(23,48,43,0.18);
+  display:grid; grid-template-columns:260px 1fr;
+  min-height:520px;
+}
+.chat-side{
+  background:var(--deep-2);
+  padding:28px 22px;
+  border-inline-end:1px solid var(--line-light);
+}
+.chat-side h4{ color:var(--paper); font-size:0.95rem; margin-bottom:16px; font-weight:700;}
+.persona-btn{
+  display:flex; align-items:center; gap:10px;
+  width:100%; text-align:start;
+  background:transparent; border:1px solid transparent;
+  color:rgba(242,236,221,0.75);
+  padding:11px 12px; border-radius:12px; font-size:0.87rem; font-weight:500;
+  margin-bottom:6px; transition:all .2s ease;
+}
+.persona-btn:hover{ background:rgba(242,236,221,0.06); }
+.persona-btn.active{
+  background:rgba(227,168,87,0.14); color:var(--gold); border-color:rgba(227,168,87,0.3);
+}
+.persona-dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+
+.chat-main{ display:flex; flex-direction:column; background:var(--paper); }
+.chat-header{
+  padding:20px 26px; border-bottom:1px solid var(--line);
+  display:flex; align-items:center; gap:12px;
+}
+.chat-avatar{
+  width:36px; height:36px; border-radius:50%;
+  background:conic-gradient(var(--gold),var(--clay),var(--sage),var(--gold));
+  flex-shrink:0;
+}
+.chat-header-text strong{ display:block; font-size:0.95rem; }
+.chat-header-text span{ font-size:0.78rem; color:rgba(23,48,43,0.55); }
+
+.chat-messages{
+  flex:1; padding:24px 26px; overflow-y:auto;
+  display:flex; flex-direction:column; gap:16px;
+  max-height:360px;
+}
+.msg{ max-width:78%; padding:12px 16px; border-radius:16px; font-size:0.92rem; line-height:1.55; }
+.msg.user{
+  align-self:flex-end; background:var(--gold); color:var(--deep); border-end-end-radius:4px;
+}
+[dir="rtl"] .msg.user{ align-self:flex-start; }
+.msg.bot{
+  align-self:flex-start; background:var(--paper-2); border:1px solid var(--line); border-end-start-radius:4px;
+}
+[dir="rtl"] .msg.bot{ align-self:flex-end; }
+.msg.bot.typing{ color:rgba(23,48,43,0.45); font-style:italic; }
+
+.chat-input-row{
+  padding:18px 22px; border-top:1px solid var(--line);
+  display:flex; gap:10px; align-items:center;
+}
+.chat-input-row input{
+  flex:1; border:1px solid var(--line); background:var(--paper-2);
+  border-radius:100px; padding:12px 18px; font-size:0.92rem; color:var(--ink);
+  font-family:inherit;
+}
+.chat-input-row input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+.chat-send{
+  background:var(--deep); color:var(--paper); border:none;
+  width:44px; height:44px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .2s ease;
+}
+.chat-send:hover{ transform:scale(1.06); }
+.chat-send:disabled{ opacity:0.5; cursor:default; }
+[dir="rtl"] .chat-send svg{ transform:scaleX(-1); }
+
+/* ---------- PRICING ---------- */
+.pricing-section{ background:var(--paper-2); }
+.pricing-currency-note{ font-size:0.8rem; color:var(--gold); font-weight:600; margin-top:10px; }
+.pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; align-items:stretch; }
+.price-card{
+  background:var(--paper); border:1px solid var(--line); border-radius:20px;
+  padding:32px 26px; display:flex; flex-direction:column; position:relative;
+}
+.price-card.featured{
+  background:var(--deep); color:var(--paper); border-color:var(--deep);
+  transform:scale(1.03); box-shadow:0 24px 44px rgba(23,48,43,0.18);
+}
+.price-badge{
+  position:absolute; top:-13px; inset-inline-start:26px;
+  background:var(--gold); color:var(--deep); font-size:0.72rem; font-weight:800;
+  padding:5px 14px; border-radius:100px; letter-spacing:0.03em;
+}
+.price-plan{ font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--clay); }
+.price-card.featured .price-plan{ color:var(--gold); }
+[dir="rtl"] .price-plan{ letter-spacing:0; }
+.price-amount{ font-family:var(--disp-en); font-size:2.4rem; font-weight:700; margin:14px 0 6px; }
+[dir="rtl"] .price-amount{ font-family:var(--disp-ar); font-weight:800; }
+.price-note{ font-size:0.85rem; opacity:0.65; margin-bottom:22px; }
+.price-feats{ list-style:none; margin-bottom:28px; flex:1; }
+.price-feats li{
+  font-size:0.9rem; padding:9px 0; border-top:1px solid var(--line);
+  display:flex; align-items:center; gap:9px;
+}
+.price-card.featured .price-feats li{ border-color:var(--line-light); }
+.price-feats li::before{ content:'✓'; color:var(--gold); font-weight:700; }
+.price-btn{ width:100%; text-align:center; justify-content:center; }
+.price-card.featured .btn-primary{ background:var(--gold); }
+
+/* ---------- ABOUT ---------- */
+.about-section{ background:var(--paper); }
+.about-wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:54px; align-items:start; }
+.about-lead{ font-weight:600; color:var(--ink); opacity:0.9; margin-bottom:14px; }
+.about-values{ display:flex; flex-direction:column; gap:22px; }
+.about-value{
+  border-inline-start:2px solid var(--gold); padding-inline-start:18px;
+}
+.about-value strong{ display:block; font-size:1rem; margin-bottom:6px; }
+.about-value p{ font-size:0.9rem; color:rgba(23,48,43,0.65); }
+
+/* ---------- AUTH MODAL ---------- */
+.auth-overlay{
+  position:fixed; inset:0; background:rgba(23,48,43,0.55); backdrop-filter:blur(3px);
+  display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+}
+.auth-overlay.open{ display:flex; }
+.auth-modal{
+  background:var(--paper); border-radius:22px; padding:36px 32px; width:100%; max-width:400px;
+  position:relative; box-shadow:0 30px 60px rgba(0,0,0,0.25);
+}
+.auth-close{
+  position:absolute; top:16px; inset-inline-end:16px; background:transparent; border:none;
+  font-size:1.4rem; line-height:1; color:rgba(23,48,43,0.5); width:30px; height:30px;
+}
+.auth-tabs{ display:flex; gap:4px; background:var(--paper-2); border-radius:100px; padding:4px; margin-bottom:22px; }
+.auth-tab{
+  flex:1; border:none; background:transparent; padding:9px; border-radius:100px;
+  font-weight:700; font-size:0.85rem; color:rgba(23,48,43,0.55);
+}
+.auth-tab.active{ background:var(--deep); color:var(--paper); }
+.auth-title{ font-size:1.4rem; font-weight:700; margin-bottom:6px; }
+.auth-sub{ font-size:0.87rem; color:rgba(23,48,43,0.6); margin-bottom:22px; }
+.auth-form{ display:flex; flex-direction:column; gap:14px; }
+.auth-field{ display:flex; flex-direction:column; gap:6px; }
+.auth-field label{ font-size:0.8rem; font-weight:600; opacity:0.75; }
+.auth-field input{
+  border:1px solid var(--line); background:var(--paper-2); border-radius:12px;
+  padding:11px 14px; font-size:0.92rem; color:var(--ink); font-family:inherit;
+}
+.auth-field input:focus{ outline:2px solid var(--gold); outline-offset:1px; }
+.auth-submit{ width:100%; text-align:center; justify-content:center; margin-top:6px; }
+.auth-submit:disabled{ opacity:0.6; cursor:default; }
+.auth-error{
+  font-size:0.82rem; color:var(--clay); font-weight:600; min-height:0;
+  margin:-4px 0 0;
+}
+.auth-error:empty{ display:none; }
+.auth-count{
+  font-size:0.8rem; color:var(--sage); font-weight:600; text-align:center; margin-top:16px;
+}
+.auth-note{ font-size:0.78rem; color:rgba(23,48,43,0.5); text-align:center; margin-top:16px; }
+
+/* ---------- FOOTER ---------- */
+.footer{ background:var(--deep); color:rgba(242,236,221,0.55); padding:36px 0; font-size:0.85rem; }
+.footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width:860px){
+  .hero .wrap{ grid-template-columns:1fr; }
+  .domains-grid{ grid-template-columns:1fr; }
+  .programs-grid{ grid-template-columns:1fr 1fr; }
+  .steps{ grid-template-columns:1fr 1fr; row-gap:28px; }
+  .step{ border-inline-start:none; padding-inline-start:0; }
+  .chat-shell{ grid-template-columns:1fr; }
+  .chat-side{ border-inline-end:none; border-bottom:1px solid var(--line-light); display:flex; gap:8px; overflow-x:auto; }
+  .chat-side h4{ display:none; }
+  .persona-btn{ white-space:nowrap; width:auto; margin-bottom:0; }
+  .pricing-grid{ grid-template-columns:1fr; }
+  .price-card.featured{ transform:none; }
+  .about-wrap{ grid-template-columns:1fr; }
+}
+@media (max-width:520px){
+  .programs-grid{ grid-template-columns:1fr; }
+}
+@media (max-width:480px){
+  .section{ padding:56px 0; }
+  .hero{ padding-top:60px; }
+  .hero-actions{ flex-direction:column; align-items:stretch; }
+  .hero-actions button{ width:100%; text-align:center; justify-content:center; }
+  .steps{ grid-template-columns:1fr; row-gap:24px; }
+  .compass{ width:270px; }
+  .price-card.featured{ order:-1; }
+  .footer .wrap{ flex-direction:column; text-align:center; gap:6px; }
+  .auth-modal{ padding:28px 20px; max-width:100%; }
+  .price-amount{ font-size:2rem; }
+  .domain-card, .program-card, .price-card{ padding:24px 20px; }
+}
+@media (max-width:360px){
+  h1.hero-title{ font-size:1.9rem; }
+  .compass{ width:230px; }
+}
+</style>
+
+<div id="app">
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand"><span class="brand-mark"></span><span data-i18n="brand"></span></div>
+    <div class="nav-links">
+      <a href="javascript:void(0)" onclick="scrollToId('domains')" data-i18n="navDomains"></a>
+      <a href="javascript:void(0)" onclick="scrollToId('programs')" data-i18n="navPrograms"></a>
+      <a href="javascript:void(0)" onclick="scrollToId('pricing')" data-i18n="navPricing"></a>
+      <a href="javascript:void(0)" onclick="scrollToId('about')" data-i18n="navAbout"></a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-toggle">
+        <button id="btn-ar" onclick="setLang('ar')">AR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <button class="nav-login" id="nav-login-btn" onclick="openAuth('login')" data-i18n="navLogin"></button>
+      <button class="nav-cta" id="nav-cta-btn" onclick="openAuth('signup')" data-i18n="navCta"></button>
+      <div class="nav-user-badge" id="nav-user-badge">
+        <span class="nav-user-dot"></span>
+        <span id="nav-user-name"></span>
+        <button class="nav-logout" onclick="logoutUser()" data-i18n="navLogout"></button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow" data-i18n="heroEyebrow"></span>
+      <h1 class="hero-title disp" data-i18n="heroTitle"></h1>
+      <p class="hero-sub" data-i18n="heroSub"></p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="scrollToChat()" data-i18n="heroCta1"></button>
+        <button class="btn-ghost" onclick="scrollToId('domains')" data-i18n="heroCta2"></button>
+      </div>
+    </div>
+    <div></div>
+  </div>
+  <div class="compass-wrap">
+    <div class="compass">
+      <svg viewBox="0 0 340 340">
+        <circle cx="170" cy="170" r="130" fill="none" stroke="rgba(242,236,221,0.15)" stroke-width="1"/>
+        <circle cx="170" cy="170" r="90" fill="none" stroke="rgba(242,236,221,0.1)" stroke-width="1"/>
+
+        <g class="compass-node" data-domain="mind" onclick="focusDomain('mind')">
+          <circle cx="170" cy="45" r="34" fill="#E3A857"/>
+          <text x="170" y="49" text-anchor="middle" data-i18n="domMindShort"></text>
+        </g>
+        <g class="compass-node" data-domain="body" onclick="focusDomain('body')">
+          <circle cx="295" cy="170" r="34" fill="#8FA88A"/>
+          <text x="295" y="174" text-anchor="middle" data-i18n="domBodyShort"></text>
+        </g>
+        <g class="compass-node" data-domain="career" onclick="focusDomain('career')">
+          <circle cx="170" cy="295" r="34" fill="#C1613F"/>
+          <text x="170" y="299" text-anchor="middle" data-i18n="domCareerShort"></text>
+        </g>
+        <g class="compass-node" data-domain="more" onclick="focusDomain('more')">
+          <circle cx="45" cy="170" r="34" fill="#F2ECDD"/>
+          <text x="45" y="174" text-anchor="middle" data-i18n="domMoreShort"></text>
+        </g>
+
+        <g class="compass-center pulse" onclick="scrollToChat()" style="cursor:pointer;">
+          <circle cx="170" cy="170" r="46" fill="#17302B" stroke="#E3A857" stroke-width="2"/>
+          <text x="170" y="167" text-anchor="middle" fill="#F2ECDD" font-size="13" font-weight="700" data-i18n="compassCenter1"></text>
+          <text x="170" y="184" text-anchor="middle" fill="#E3A857" font-size="11" data-i18n="compassCenter2"></text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="domains">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="domainsTag"></span>
+      <h2 class="sec-title disp" data-i18n="domainsTitle"></h2>
+      <p class="sec-desc" data-i18n="domainsDesc"></p>
+    </div>
+    <div class="domains-grid">
+      <div class="domain-card" style="--dot:#E3A857">
+        <div class="domain-dot" style="background:rgba(227,168,87,0.18); color:#E3A857">✺</div>
+        <h3 data-i18n="domMindTitle"></h3>
+        <p data-i18n="domMindDesc"></p>
+      </div>
+      <div class="domain-card" style="--dot:#8FA88A">
+        <div class="domain-dot" style="background:rgba(143,168,138,0.18); color:#8FA88A">◐</div>
+        <h3 data-i18n="domBodyTitle"></h3>
+        <p data-i18n="domBodyDesc"></p>
+      </div>
+      <div class="domain-card" style="--dot:#C1613F">
+        <div class="domain-dot" style="background:rgba(193,97,63,0.18); color:#C1613F">▲</div>
+        <h3 data-i18n="domCareerTitle"></h3>
+        <p data-i18n="domCareerDesc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section programs-section" id="programs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="programsTag"></span>
+      <h2 class="sec-title disp" data-i18n="programsTitle"></h2>
+      <p class="sec-desc" data-i18n="programsDesc"></p>
+    </div>
+    <div class="programs-grid">
+      <div class="program-card" style="--dot:#E3A857">
+        <span class="program-duration" style="color:#E3A857">21 <span data-i18n="daysUnit"></span></span>
+        <h3 data-i18n="prog1Title"></h3>
+        <p data-i18n="prog1Desc"></p>
+        <button class="program-btn" onclick="openAuth('signup')" data-i18n="programJoin"></button>
+      </div>
+      <div class="program-card" style="--dot:#8FA88A">
+        <span class="program-duration" style="color:#8FA88A">8 <span data-i18n="weeksUnit"></span></span>
+        <h3 data-i18n="prog2Title"></h3>
+        <p data-i18n="prog2Desc"></p>
+        <button class="program-btn" onclick="openAuth('signup')" data-i18n="programJoin"></button>
+      </div>
+      <div class="program-card" style="--dot:#C1613F">
+        <span class="program-duration" style="color:#C1613F">2 <span data-i18n="weeksUnit"></span></span>
+        <h3 data-i18n="prog3Title"></h3>
+        <p data-i18n="prog3Desc"></p>
+        <button class="program-btn" onclick="openAuth('signup')" data-i18n="programJoin"></button>
+      </div>
+      <div class="program-card featured-program" style="--dot:#F2ECDD">
+        <span class="program-badge" data-i18n="programFullTag"></span>
+        <span class="program-duration" style="color:var(--gold)">12 <span data-i18n="weeksUnit"></span></span>
+        <h3 data-i18n="prog4Title"></h3>
+        <p data-i18n="prog4Desc"></p>
+        <button class="program-btn light" onclick="openAuth('signup')" data-i18n="programJoin"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section how">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="howTag"></span>
+      <h2 class="sec-title disp" data-i18n="howTitle"></h2>
+      <p class="sec-desc" data-i18n="howDesc"></p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-num">01</span><h4 data-i18n="step1Title"></h4><p data-i18n="step1Desc"></p></div>
+      <div class="step"><span class="step-num">02</span><h4 data-i18n="step2Title"></h4><p data-i18n="step2Desc"></p></div>
+      <div class="step"><span class="step-num">03</span><h4 data-i18n="step3Title"></h4><p data-i18n="step3Desc"></p></div>
+      <div class="step"><span class="step-num">04</span><h4 data-i18n="step4Title"></h4><p data-i18n="step4Desc"></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section chat-section" id="chat">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="chatTag"></span>
+      <h2 class="sec-title disp" data-i18n="chatTitle"></h2>
+      <p class="sec-desc" data-i18n="chatDesc"></p>
+    </div>
+
+    <div class="chat-shell">
+      <div class="chat-side">
+        <h4 data-i18n="chatSideTitle"></h4>
+        <button class="persona-btn active" data-persona="general" onclick="setPersona('general')">
+          <span class="persona-dot" style="background:#E3A857"></span><span data-i18n="personaGeneral"></span>
+        </button>
+        <button class="persona-btn" data-persona="mind" onclick="setPersona('mind')">
+          <span class="persona-dot" style="background:#E3A857"></span><span data-i18n="domMindTitle"></span>
+        </button>
+        <button class="persona-btn" data-persona="body" onclick="setPersona('body')">
+          <span class="persona-dot" style="background:#8FA88A"></span><span data-i18n="domBodyTitle"></span>
+        </button>
+        <button class="persona-btn" data-persona="career" onclick="setPersona('career')">
+          <span class="persona-dot" style="background:#C1613F"></span><span data-i18n="domCareerTitle"></span>
+        </button>
+      </div>
+      <div class="chat-main">
+        <div class="chat-header">
+          <div class="chat-avatar"></div>
+          <div class="chat-header-text">
+            <strong data-i18n="chatHeaderName"></strong>
+            <span id="chat-persona-label" data-i18n="personaGeneral"></span>
+          </div>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-row">
+          <input id="chat-input" type="text" data-i18n-ph="chatPlaceholder" onkeydown="if(event.key==='Enter')sendMessage()"/>
+          <button class="chat-send" id="chat-send-btn" onclick="sendMessage()" aria-label="send">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section pricing-section" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag" data-i18n="pricingTag"></span>
+      <h2 class="sec-title disp" data-i18n="pricingTitle"></h2>
+      <p class="sec-desc" data-i18n="pricingDesc"></p>
+      <p class="pricing-currency-note" id="pricing-currency-note"></p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <span class="price-plan" data-i18n="planFreeName"></span>
+        <div class="price-amount"><span id="price-free-amount"></span></div>
+        <p class="price-note" data-i18n="planFreeNote"></p>
+        <ul class="price-feats">
+          <li data-i18n="planFreeF1"></li>
+          <li data-i18n="planFreeF2"></li>
+          <li data-i18n="planFreeF3"></li>
+        </ul>
+        <button class="btn-ghost price-btn" onclick="openAuth('signup')" data-i18n="planFreeCta"></button>
+      </div>
+      <div class="price-card featured">
+        <span class="price-badge" data-i18n="planPopular"></span>
+        <span class="price-plan" data-i18n="planProName"></span>
+        <div class="price-amount"><span id="price-pro-amount"></span></div>
+        <p class="price-note" data-i18n="planProNote"></p>
+        <ul class="price-feats">
+          <li data-i18n="planProF1"></li>
+          <li data-i18n="planProF2"></li>
+          <li data-i18n="planProF3"></li>
+          <li data-i18n="planProF4"></li>
+        </ul>
+        <button class="btn-primary price-btn" onclick="openAuth('signup')" data-i18n="planProCta"></button>
+      </div>
+      <div class="price-card">
+        <span class="price-plan" data-i18n="planTeamName"></span>
+        <div class="price-amount"><span data-i18n="planTeamPrice"></span></div>
+        <p class="price-note" data-i18n="planTeamNote"></p>
+        <ul class="price-feats">
+          <li data-i18n="planTeamF1"></li>
+          <li data-i18n="planTeamF2"></li>
+          <li data-i18n="planTeamF3"></li>
+        </ul>
+        <button class="btn-ghost price-btn" onclick="openAuth('signup')" data-i18n="planTeamCta"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section about-section" id="about">
+  <div class="wrap about-wrap">
+    <div>
+      <span class="tag" data-i18n="aboutTag"></span>
+      <h2 class="sec-title disp" data-i18n="aboutTitle"></h2>
+      <p class="sec-desc about-lead" data-i18n="aboutLead"></p>
+      <p class="sec-desc" data-i18n="aboutBody"></p>
+    </div>
+    <div class="about-values">
+      <div class="about-value">
+        <strong data-i18n="aboutV1Title"></strong>
+        <p data-i18n="aboutV1Desc"></p>
+      </div>
+      <div class="about-value">
+        <strong data-i18n="aboutV2Title"></strong>
+        <p data-i18n="aboutV2Desc"></p>
+      </div>
+      <div class="about-value">
+        <strong data-i18n="aboutV3Title"></strong>
+        <p data-i18n="aboutV3Desc"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <span data-i18n="footerText"></span>
+    <span data-i18n="footerTag"></span>
+  </div>
+</footer>
+
+<div class="auth-overlay" id="auth-overlay" onclick="if(event.target===this)closeAuth()">
+  <div class="auth-modal">
+    <button class="auth-close" onclick="closeAuth()" aria-label="close">&times;</button>
+    <div class="auth-tabs">
+      <button id="tab-login" class="auth-tab active" onclick="setAuthTab('login')" data-i18n="authTabLogin"></button>
+      <button id="tab-signup" class="auth-tab" onclick="setAuthTab('signup')" data-i18n="authTabSignup"></button>
+    </div>
+    <h3 class="auth-title disp" id="auth-title" data-i18n="authTitleLogin"></h3>
+    <p class="auth-sub" data-i18n="authSub"></p>
+    <form class="auth-form" id="auth-form" onsubmit="handleAuthSubmit(event)">
+      <div class="auth-field" id="auth-name-field">
+        <label data-i18n="authNameLabel"></label>
+        <input type="text" id="auth-name-input" data-i18n-ph="authNamePh" autocomplete="name"/>
+      </div>
+      <div class="auth-field">
+        <label data-i18n="authEmailLabel"></label>
+        <input type="email" id="auth-email-input" data-i18n-ph="authEmailPh" autocomplete="email" required/>
+      </div>
+      <div class="auth-field">
+        <label data-i18n="authPassLabel"></label>
+        <input type="password" id="auth-pass-input" data-i18n-ph="authPassPh" autocomplete="current-password" required minlength="6"/>
+      </div>
+      <p class="auth-error" id="auth-error"></p>
+      <button type="submit" class="btn-primary auth-submit" id="auth-submit" data-i18n="authSubmitLogin"></button>
+    </form>
+    <p class="auth-count" id="auth-user-count"></p>
+    <p class="auth-note" data-i18n="authNote"></p>
+  </div>
+</div>
+
+</div>
+
+<script>
+const I18N = {
+  ar: {
+    brand: "Rahafit",
+    navCta: "ابدأ الآن",
+    heroEyebrow: "مدرب حياة يعمل بالذكاء الاصطناعي",
+    heroTitle: "بوصلتك الشخصية نحو <em>نسخة أفضل</em> منك",
+    heroSub: "مساعد ذكي يرافقك في تطوير ذاتك، لياقتك وتغذيتك، ومسارك المهني — في مكان واحد، بأسلوب يفهمك.",
+    heroCta1: "ابدأ حوارك الأول",
+    heroCta2: "اكتشف المجالات",
+    compassCenter1: "ابدأ",
+    compassCenter2: "المحادثة",
+    domMindShort: "الذات",
+    domBodyShort: "اللياقة",
+    domCareerShort: "المسار",
+    domMoreShort: "قريباً",
+    domainsTag: "المجالات",
+    domainsTitle: "كل جوانب حياتك، في مكان واحد",
+    domainsDesc: "بدل ما تدور على تطبيق لكل حاجة، مرشدك هنا يفهم قصتك الكاملة ويربط بين كل الجوانب دي مع بعض.",
+    domMindTitle: "تطوير شخصي وحياتي",
+    domMindDesc: "وضوح في الأهداف، عادات يومية، وتحفيز مستمر يناسب طريقة تفكيرك.",
+    domBodyTitle: "لياقة بدنية وتغذية",
+    domBodyDesc: "خطط تمرين وتغذية تتكيف مع وقتك وإمكانياتك، مش قوالب جاهزة.",
+    domCareerTitle: "المسار المهني والوظيفي",
+    domCareerDesc: "من كتابة السيرة الذاتية للتحضير للمقابلات، لحد اتخاذ قرارات النقلة المهنية.",
+    howTag: "طريقة العمل",
+    howTitle: "رحلتك في أربع خطوات",
+    howDesc: "بسيطة وواضحة، وتتطور معاك كل ما تستخدمها أكتر.",
+    step1Title: "احكي قصتك",
+    step1Desc: "تجاوب على شوية أسئلة بسيطة عشان المدرب يفهم وضعك وأهدافك.",
+    step2Title: "خطة مخصصة",
+    step2Desc: "يبني لك مسار عملي مبني على اللي قلته، مش نصايح عامة.",
+    step3Title: "تحاور وتنفذ",
+    step3Desc: "كلمه في أي وقت، هيرد عليك بأسلوب داعم ومباشر.",
+    step4Title: "تابع تقدمك",
+    step4Desc: "يراجع معاك خطواتك بانتظام ويعدّل الخطة حسب اللي بيحصل فعلاً.",
+    chatTag: "جرّب دلوقتي",
+    chatTitle: "اتكلم مع مرشدك",
+    chatDesc: "ده نموذج تجريبي شغال فعلاً — اختار المجال اللي عايز تتكلم فيه وابدأ.",
+    chatSideTitle: "اختار مجال",
+    personaGeneral: "عام",
+    chatHeaderName: "Rahafit",
+    chatPlaceholder: "اكتب رسالتك هنا...",
+    chatFirstMsg: "أهلاً بيك! أنا مرشدك الشخصي. احكيلي إيه اللي في بالك النهارده — سواء كان هدف عايز توضحه، تحدي بتواجهه، أو حتى مجرد بداية محادثة.",
+    footerText: "© 2026 Rahafit — نموذج تصميم أولي",
+    footerTag: "AI Coach Concept",
+
+    navDomains: "المجالات",
+    navPricing: "الأسعار",
+    navAbout: "عن المشروع",
+    navPrograms: "البرامج",
+    navLogin: "تسجيل الدخول",
+
+    programsTag: "البرامج",
+    programsTitle: "برامج منظّمة بمدة ونتيجة واضحة",
+    programsDesc: "لو حابب مسار محدد بخطوات واضحة بدل المحادثة المفتوحة، اختار برنامج وابدأ فيه.",
+    daysUnit: "يوم",
+    weeksUnit: "أسابيع",
+    prog1Title: "إعادة ضبط العادات",
+    prog1Desc: "برنامج مكثف لبناء 3 عادات يومية تدعم أهدافك، بمتابعة يومية من المرشد.",
+    prog2Title: "أساسيات اللياقة",
+    prog2Desc: "خطة تمرين وتغذية تدريجية من الصفر، تتكيف مع وقتك ومستواك أسبوع بأسبوع.",
+    prog3Title: "وضوح المسار المهني",
+    prog3Desc: "من تحديد هدفك المهني لحد تجهيز سيرتك الذاتية والاستعداد للمقابلات.",
+    prog4Title: "رحلة التوازن الكاملة",
+    prog4Desc: "برنامج شامل يجمع الذات واللياقة والمسار المهني في خطة واحدة متكاملة.",
+    programFullTag: "الأشمل",
+    programJoin: "انضم للبرنامج",
+
+    pricingTag: "الأسعار",
+    pricingTitle: "خطة تناسب رحلتك",
+    pricingDesc: "ابدأ مجاناً، وارقّي لما تحتاج مرافقة أعمق وأدوات أكتر.",
+    planFreeName: "مجاني",
+    planFreeNote: "للتجربة والاستكشاف",
+    planFreeF1: "10 محادثات شهرياً",
+    planFreeF2: "مجال واحد تختاره",
+    planFreeF3: "دعم بالعربي والإنجليزي",
+    planFreeCta: "ابدأ مجاناً",
+    planPopular: "الأكتر اختياراً",
+    planProName: "بريميوم",
+    pricingCurrencyNote: "الأسعار بتتحول تلقائي حسب دولتك",
+    planProNote: "لمرافقة كاملة في كل جوانب حياتك",
+    planProF1: "محادثات غير محدودة",
+    planProF2: "كل المجالات مفتوحة",
+    planProF3: "خطط وتقارير تقدم أسبوعية",
+    planProF4: "أولوية في الرد",
+    planProCta: "اشترك دلوقتي",
+    planTeamName: "فرق وشركات",
+    planTeamPrice: "حسب الطلب",
+    planTeamNote: "لبرامج رفاهية الموظفين",
+    planTeamF1: "حسابات متعددة",
+    planTeamF2: "تقارير جماعية مجهّلة الهوية",
+    planTeamF3: "مدير حساب مخصص",
+    planTeamCta: "تواصل معنا",
+
+    aboutTag: "عن المشروع",
+    aboutTitle: "ليه بنعمل Rahafit؟",
+    aboutLead: "لأن معظم الناس بتوقف عن تطوير نفسها مش لنقص الرغبة، لكن لنقص المرافقة المستمرة.",
+    aboutBody: "Rahafit مبني على فكرة إن التطوير الشخصي، اللياقة، والمسار المهني مترابطين مش منفصلين — قرارك في شغلك بيأثر على وقتك ولياقتك، وحالتك النفسية بتأثر على قرارك المهني. عشان كده بنقدملك مرشد واحد يفهم الصورة كاملة.",
+    aboutV1Title: "مبني على قصتك",
+    aboutV1Desc: "مش نصايح عامة، كل رد مبني على اللي احكيته فعلاً.",
+    aboutV2Title: "خصوصية أول حاجة",
+    aboutV2Desc: "بياناتك ملكك، وإنت اللي بتقرر تشاركها ازاي.",
+    aboutV3Title: "ثنائي اللغة بالكامل",
+    aboutV3Desc: "اتكلم بالعربي أو الإنجليزي، وهو هيرد بنفس اللغة والأسلوب.",
+
+    authTabLogin: "تسجيل الدخول",
+    authTabSignup: "حساب جديد",
+    authTitleLogin: "أهلاً بيك تاني",
+    authTitleSignup: "ابدأ رحلتك",
+    authSub: "ده نموذج تجريبي — مفيش تسجيل حقيقي دلوقتي.",
+    authNameLabel: "الاسم",
+    authNamePh: "اسمك",
+    authEmailLabel: "البريد الإلكتروني",
+    authEmailPh: "example@email.com",
+    authPassLabel: "كلمة المرور",
+    authPassPh: "••••••••",
+    authSubmitLogin: "تسجيل الدخول",
+    authSubmitSignup: "إنشاء الحساب",
+    authNote: "بالمتابعة إنت موافق على الشروط وسياسة الخصوصية.",
+    authErrRequired: "من فضلك املأ كل الحقول.",
+    authErrShortPass: "كلمة المرور لازم تكون 6 حروف أو أكتر.",
+    authErrExists: "في حساب مسجل بالإيميل ده بالفعل، جرب تسجّل دخول.",
+    authErrNoAccount: "مفيش حساب بالإيميل ده، جرب تعمل حساب جديد.",
+    authErrWrongPass: "كلمة المرور مش صح.",
+    authErrGeneric: "حصل خطأ، جرب تاني.",
+    authErrConfirmNeeded: "الحساب اتعمل، محتاج تأكيد إضافي — كلم صاحب الموقع.",
+    authSecureNote: "🔒 بياناتك بتتخزن بأمان في قاعدة بيانات محمية.",
+    navLogout: "تسجيل الخروج",
+  },
+  en: {
+    brand: "Rahafit",
+    navCta: "Get Started",
+    heroEyebrow: "AI-Powered Life Coach",
+    heroTitle: "Your personal compass toward a <em>better you</em>",
+    heroSub: "One intelligent coach for personal growth, fitness & nutrition, and career direction — all in one place, tuned to how you think.",
+    heroCta1: "Start your first chat",
+    heroCta2: "Explore the domains",
+    compassCenter1: "Start",
+    compassCenter2: "chatting",
+    domMindShort: "Mind",
+    domBodyShort: "Body",
+    domCareerShort: "Career",
+    domMoreShort: "Soon",
+    domainsTag: "Domains",
+    domainsTitle: "Every part of your life, in one place",
+    domainsDesc: "Instead of juggling an app for everything, your coach understands your full story and connects the dots between them.",
+    domMindTitle: "Personal & Life Growth",
+    domMindDesc: "Clarity on goals, daily habits, and steady motivation shaped around how you actually think.",
+    domBodyTitle: "Fitness & Nutrition",
+    domBodyDesc: "Workout and nutrition plans that adapt to your time and resources — not generic templates.",
+    domCareerTitle: "Career & Professional Path",
+    domCareerDesc: "From resume writing to interview prep, all the way to bigger career decisions.",
+    howTag: "How it works",
+    howTitle: "Your journey in four steps",
+    howDesc: "Simple and clear — and it gets sharper the more you use it.",
+    step1Title: "Tell your story",
+    step1Desc: "Answer a few simple questions so the coach understands your situation and goals.",
+    step2Title: "Get a tailored plan",
+    step2Desc: "A practical path built on what you shared — not generic advice.",
+    step3Title: "Talk it through",
+    step3Desc: "Message it any time and get direct, supportive responses.",
+    step4Title: "Track your progress",
+    step4Desc: "It checks in regularly and adjusts the plan based on what's really happening.",
+    chatTag: "Try it now",
+    chatTitle: "Talk to your coach",
+    chatDesc: "This is a working demo — pick a domain and start the conversation.",
+    chatSideTitle: "Choose a focus",
+    personaGeneral: "General",
+    chatHeaderName: "Rahafit",
+    chatPlaceholder: "Type your message...",
+    chatFirstMsg: "Hi there! I'm your personal coach. Tell me what's on your mind today — a goal you want to clarify, a challenge you're facing, or just where to start.",
+    footerText: "© 2026 Rahafit — early design concept",
+    footerTag: "AI Coach Concept",
+
+    navDomains: "Domains",
+    navPrograms: "Programs",
+    navPricing: "Pricing",
+    navAbout: "About",
+    navLogin: "Log in",
+
+    programsTag: "Programs",
+    programsTitle: "Structured programs with a clear timeline",
+    programsDesc: "Prefer a defined path over open-ended chat? Pick a program and follow it step by step.",
+    daysUnit: "days",
+    weeksUnit: "weeks",
+    prog1Title: "Habit Reset",
+    prog1Desc: "An intensive sprint to build 3 daily habits that support your goals, with daily coach check-ins.",
+    prog2Title: "Fitness Foundations",
+    prog2Desc: "A progressive workout and nutrition plan from scratch, adapting to your time and level week by week.",
+    prog3Title: "Career Clarity Sprint",
+    prog3Desc: "From defining your career goal to polishing your resume and prepping for interviews.",
+    prog4Title: "Full Balance Journey",
+    prog4Desc: "A comprehensive program bringing mind, body, and career together into one integrated plan.",
+    programFullTag: "Most complete",
+    programJoin: "Join program",
+
+    pricingTag: "Pricing",
+    pricingTitle: "A plan for wherever you're headed",
+    pricingDesc: "Start free, upgrade when you need deeper guidance and more tools.",
+    planFreeName: "Free",
+    planFreeNote: "For trying things out",
+    planFreeF1: "10 conversations / month",
+    planFreeF2: "One domain of your choice",
+    planFreeF3: "Arabic & English support",
+    planFreeCta: "Start free",
+    planPopular: "Most popular",
+    planProName: "Premium",
+    pricingCurrencyNote: "Prices auto-convert based on your location",
+    planProNote: "Full coaching across your whole life",
+    planProF1: "Unlimited conversations",
+    planProF2: "All domains unlocked",
+    planProF3: "Weekly plans & progress reports",
+    planProF4: "Priority responses",
+    planProCta: "Subscribe now",
+    planTeamName: "Teams",
+    planTeamPrice: "Custom",
+    planTeamNote: "For employee wellbeing programs",
+    planTeamF1: "Multiple seats",
+    planTeamF2: "Anonymized team reports",
+    planTeamF3: "Dedicated account manager",
+    planTeamCta: "Contact us",
+
+    aboutTag: "About",
+    aboutTitle: "Why we're building Rahafit",
+    aboutLead: "Most people don't stop growing because they lack motivation — they stop because they lack steady guidance.",
+    aboutBody: "Rahafit is built on the idea that personal growth, fitness, and career are connected, not separate — a work decision shapes your time and energy, and your mental state shapes your career choices. That's why we give you one coach that sees the full picture.",
+    aboutV1Title: "Built on your story",
+    aboutV1Desc: "Not generic advice — every response is grounded in what you've actually shared.",
+    aboutV2Title: "Privacy first",
+    aboutV2Desc: "Your data is yours, and you decide how it's shared.",
+    aboutV3Title: "Fully bilingual",
+    aboutV3Desc: "Speak Arabic or English — it replies in the same language and tone.",
+
+    authTabLogin: "Log in",
+    authTabSignup: "Sign up",
+    authTitleLogin: "Welcome back",
+    authTitleSignup: "Start your journey",
+    authSub: "This is a design demo — no real account is created yet.",
+    authNameLabel: "Name",
+    authNamePh: "Your name",
+    authEmailLabel: "Email",
+    authEmailPh: "example@email.com",
+    authPassLabel: "Password",
+    authPassPh: "••••••••",
+    authSubmitLogin: "Log in",
+    authSubmitSignup: "Create account",
+    authNote: "By continuing you agree to the Terms and Privacy Policy.",
+    authErrRequired: "Please fill in all fields.",
+    authErrShortPass: "Password must be at least 6 characters.",
+    authErrExists: "An account with this email already exists — try logging in.",
+    authErrNoAccount: "No account found with this email — try signing up.",
+    authErrWrongPass: "Incorrect password.",
+    authErrGeneric: "Something went wrong, please try again.",
+    authErrConfirmNeeded: "Account created, but needs extra confirmation — contact the site owner.",
+    authSecureNote: "🔒 Your data is stored securely in a protected database.",
+    navLogout: "Log out",
+  }
+};
+
+const PERSONA_SYSTEM = {
+  general: {
+    ar: "انت 'Rahafit'، مدرب حياة ذكي شامل بيساعد في التطوير الشخصي، اللياقة والتغذية، والمسار المهني. رد بأسلوب دافئ، مشجع، ومباشر. خلي ردودك مختصرة (3-5 جمل) وعملية، واقترح خطوة تالية واضحة. رد باللهجة أو اللغة اللي المستخدم بيكتب بيها.",
+    en: "You are 'Rahafit', a warm and holistic AI life coach helping with personal growth, fitness & nutrition, and career direction. Reply with an encouraging, direct tone. Keep responses concise (3-5 sentences) and practical, and suggest one clear next step. Reply in the same language the user writes in."
+  },
+  mind: {
+    ar: "انت 'Rahafit'، متخصص في التطوير الشخصي وتحقيق الأهداف والعادات. رد بأسلوب دافئ ومحفز، مختصر وعملي، رد باللغة اللي المستخدم بيكتب بيها.",
+    en: "You are 'Rahafit', specializing in personal development, goal-setting, and habits. Be warm, motivating, concise and practical. Reply in the same language the user writes in."
+  },
+  body: {
+    ar: "انت 'Rahafit'، متخصص في اللياقة البدنية والتغذية. اديله نصايح عملية وآمنة (من غير تفاصيل طبية دقيقة أو حميات قاسية)، وشجعه يستشير مختص لو الموضوع صحي بحت. رد باللغة اللي المستخدم بيكتب بيها.",
+    en: "You are 'Rahafit', specializing in fitness and nutrition. Give safe, practical guidance (avoid precise medical or extreme-diet specifics) and suggest a professional for medical matters. Reply in the same language the user writes in."
+  },
+  career: {
+    ar: "انت 'Rahafit'، متخصص في التطوير المهني والوظيفي: السيرة الذاتية، المقابلات، وقرارات المسار المهني. رد بأسلوب عملي ومباشر. رد باللغة اللي المستخدم بيكتب بيها.",
+    en: "You are 'Rahafit', specializing in career development: resumes, interviews, and career decisions. Be practical and direct. Reply in the same language the user writes in."
+  }
+};
+
+let currentLang = 'ar';
+let currentPersona = 'general';
+let chatHistory = [];
+
+const CURRENCY_MAP = {
+  EG: { code:'EGP', rate:49,   symAr:'ج.م', symEn:'EGP' },
+  SA: { code:'SAR', rate:3.75, symAr:'ر.س', symEn:'SAR' },
+  AE: { code:'AED', rate:3.67, symAr:'د.إ', symEn:'AED' },
+  KW: { code:'KWD', rate:0.31, symAr:'د.ك', symEn:'KWD' },
+  QA: { code:'QAR', rate:3.64, symAr:'ر.ق', symEn:'QAR' },
+  BH: { code:'BHD', rate:0.38, symAr:'د.ب', symEn:'BHD' },
+  OM: { code:'OMR', rate:0.38, symAr:'ر.ع', symEn:'OMR' },
+  JO: { code:'JOD', rate:0.71, symAr:'د.أ', symEn:'JOD' },
+  US: { code:'USD', rate:1,    symAr:'$',   symEn:'$'   }
+};
+const PRO_BASE_USD = 14.99;
+let currentCurrency = CURRENCY_MAP.US;
+
+function formatPrice(usdAmount){
+  const c = currentCurrency;
+  const raw = usdAmount * c.rate;
+  const amount = raw >= 10 ? Math.round(raw) : Math.round(raw * 100) / 100;
+  const symbol = currentLang === 'ar' ? c.symAr : c.symEn;
+  return currentLang === 'ar' ? `${amount} ${symbol}` : (c.code === 'USD' ? `${symbol}${amount}` : `${amount} ${symbol}`);
+}
+
+function renderPrices(){
+  const freeEl = document.getElementById('price-free-amount');
+  const proEl = document.getElementById('price-pro-amount');
+  const perMonth = currentLang === 'ar' ? '/شهرياً' : '/mo';
+  if(freeEl) freeEl.textContent = formatPrice(0);
+  if(proEl) proEl.textContent = formatPrice(PRO_BASE_USD) + perMonth;
+}
+
+async function detectCurrency(){
+  renderPrices(); // show USD immediately while detecting
+  try{
+    const res = await fetch('https://ipapi.co/json/');
+    const data = await res.json();
+    currentCurrency = CURRENCY_MAP[data.country_code] || CURRENCY_MAP.US;
+  }catch(e){
+    currentCurrency = CURRENCY_MAP.US;
+  }
+  renderPrices();
+}
+
+function t(key){ return I18N[currentLang][key] || key; }
+
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    el.innerHTML = t(el.getAttribute('data-i18n'));
+  });
+  document.getElementById('pricing-currency-note').textContent = t('pricingCurrencyNote');
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    el.placeholder = t(el.getAttribute('data-i18n-ph'));
+  });
+  document.getElementById('chat-persona-label').textContent =
+    currentPersona === 'general' ? t('personaGeneral') : t('dom' + currentPersona.charAt(0).toUpperCase()+currentPersona.slice(1) + 'Title');
+}
+
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('app').setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', lang);
+  document.getElementById('btn-ar').classList.toggle('active', lang==='ar');
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  applyI18n();
+  renderMessages();
+  renderPrices();
+  if(document.getElementById('auth-overlay').classList.contains('open')){
+    setAuthTab(authTab);
+  }
+}
+
+function setPersona(p){
+  currentPersona = p;
+  document.querySelectorAll('.persona-btn').forEach(b=>b.classList.toggle('active', b.dataset.persona===p));
+  document.getElementById('chat-persona-label').textContent =
+    p === 'general' ? t('personaGeneral') : t('dom' + p.charAt(0).toUpperCase()+p.slice(1) + 'Title');
+  chatHistory = [];
+  renderMessages();
+}
+
+function focusDomain(d){
+  const map = { mind:'mind', body:'body', career:'career', more:'general' };
+  scrollToChat();
+  setPersona(map[d] || 'general');
+}
+
+function scrollToChat(){ document.getElementById('chat').scrollIntoView({behavior:'smooth', block:'start'}); }
+function scrollToId(id){ document.getElementById(id).scrollIntoView({behavior:'smooth', block:'start'}); }
+
+let authTab = 'login';
+let currentUser = null; // { id, email, name, accessToken }
+
+const SUPABASE_URL = 'https://xncdmrvtxotexaputrkb.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_-uLtAnaLfO272mOIhnZmhw_Lwota--8';
+
+function openAuth(tab){
+  authTab = tab;
+  resetAuthForm();
+  setAuthTab(tab);
+  document.getElementById('auth-overlay').classList.add('open');
+}
+function closeAuth(){ document.getElementById('auth-overlay').classList.remove('open'); }
+function setAuthTab(tab){
+  authTab = tab;
+  document.getElementById('tab-login').classList.toggle('active', tab==='login');
+  document.getElementById('tab-signup').classList.toggle('active', tab==='signup');
+  document.getElementById('auth-title').textContent = tab==='login' ? t('authTitleLogin') : t('authTitleSignup');
+  document.getElementById('auth-submit').textContent = tab==='login' ? t('authSubmitLogin') : t('authSubmitSignup');
+  document.getElementById('auth-name-field').style.display = tab==='login' ? 'none' : 'flex';
+  document.getElementById('auth-error').textContent = '';
+  const countEl = document.getElementById('auth-user-count');
+  if(countEl) countEl.textContent = t('authSecureNote');
+}
+function resetAuthForm(){
+  document.getElementById('auth-form').reset();
+  document.getElementById('auth-error').textContent = '';
+}
+
+async function handleAuthSubmit(e){
+  e.preventDefault();
+  const errEl = document.getElementById('auth-error');
+  errEl.textContent = '';
+
+  const name = document.getElementById('auth-name-input').value.trim();
+  const email = document.getElementById('auth-email-input').value.trim().toLowerCase();
+  const password = document.getElementById('auth-pass-input').value;
+
+  if(!email || !password || (authTab === 'signup' && !name)){
+    errEl.textContent = t('authErrRequired');
+    return;
+  }
+  if(password.length < 6){
+    errEl.textContent = t('authErrShortPass');
+    return;
+  }
+
+  const submitBtn = document.getElementById('auth-submit');
+  submitBtn.disabled = true;
+
+  try{
+    if(authTab === 'signup'){
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password, data: { name } })
+      });
+      const data = await res.json();
+      if(!res.ok){
+        errEl.textContent = data.msg && data.msg.toLowerCase().includes('already')
+          ? t('authErrExists') : (data.msg || data.error_description || t('authErrGeneric'));
+        submitBtn.disabled = false;
+        return;
+      }
+      if(!data.access_token || !data.user){
+        // Email confirmation still required server-side
+        errEl.textContent = t('authErrConfirmNeeded');
+        submitBtn.disabled = false;
+        return;
+      }
+      // Save the customer profile row (protected by RLS: only this user can write their own row)
+      await fetch(`${SUPABASE_URL}/rest/v1/customers`, {
+        method: 'POST',
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${data.access_token}`,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({ id: data.user.id, name, email })
+      });
+      currentUser = { id: data.user.id, email, name, accessToken: data.access_token };
+    } else {
+      const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+        method: 'POST',
+        headers: { apikey: SUPABASE_KEY, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if(!res.ok){
+        errEl.textContent = t('authErrWrongPass');
+        submitBtn.disabled = false;
+        return;
+      }
+      const displayName = (data.user && data.user.user_metadata && data.user.user_metadata.name) || email;
+      currentUser = { id: data.user.id, email, name: displayName, accessToken: data.access_token };
+    }
+    closeAuth();
+    updateAuthUI();
+  }catch(err){
+    errEl.textContent = t('authErrGeneric');
+  }
+  submitBtn.disabled = false;
+}
+
+function updateAuthUI(){
+  const loginBtn = document.getElementById('nav-login-btn');
+  const ctaBtn = document.getElementById('nav-cta-btn');
+  const badge = document.getElementById('nav-user-badge');
+  if(currentUser){
+    loginBtn.style.display = 'none';
+    ctaBtn.style.display = 'none';
+    badge.style.display = 'flex';
+    document.getElementById('nav-user-name').textContent = currentUser.name || currentUser.email;
+  } else {
+    loginBtn.style.display = '';
+    ctaBtn.style.display = '';
+    badge.style.display = 'none';
+  }
+}
+
+function logoutUser(){
+  currentUser = null;
+  updateAuthUI();
+}
+
+function renderMessages(){
+  const box = document.getElementById('chat-messages');
+  box.innerHTML = '';
+  if(chatHistory.length === 0){
+    appendBubble('bot', t('chatFirstMsg'));
+  } else {
+    chatHistory.forEach(m => appendBubble(m.role === 'user' ? 'user' : 'bot', m.content));
+  }
+}
+
+function appendBubble(role, text){
+  const box = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+
+async function sendMessage(){
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+  document.getElementById('chat-send-btn').disabled = true;
+
+  if(chatHistory.length === 0){
+    // seed the visible greeting into history context isn't needed for API, just UI
+  }
+  chatHistory.push({role:'user', content:text});
+  appendBubble('user', text);
+
+  const typing = appendBubble('bot typing', currentLang==='ar' ? 'بيكتب...' : 'Typing...');
+
+  try{
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: PERSONA_SYSTEM[currentPersona][currentLang],
+        messages: chatHistory.map(m => ({role: m.role, content: m.content}))
+      })
+    });
+    const data = await response.json();
+    typing.remove();
+    const reply = (data.content || []).filter(b=>b.type==='text').map(b=>b.text).join('\n') ||
+      (currentLang==='ar' ? 'حصل خطأ، جرب تاني.' : 'Something went wrong, please try again.');
+    chatHistory.push({role:'assistant', content: reply});
+    appendBubble('bot', reply);
+  }catch(err){
+    typing.remove();
+    appendBubble('bot', currentLang==='ar' ? 'مش قادر أوصل دلوقتي، جرب تاني بعد شوية.' : 'Can\'t connect right now, please try again shortly.');
+  }
+  document.getElementById('chat-send-btn').disabled = false;
+}
+
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeAuth(); });
+
+setLang('ar');
+detectCurrency();
+</script>
